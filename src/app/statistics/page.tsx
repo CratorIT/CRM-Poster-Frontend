@@ -1,9 +1,8 @@
 import ComingSoonPage from '@/components/ComingSoonPage';
-
-export default function Home() {
+export default function Statistics() {
   return (
     <div>
-      <ComingSoonPage />
+      <ComingSoonPage name="Statistics" />
     </div>
   );
 }

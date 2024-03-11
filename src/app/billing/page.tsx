@@ -1,9 +1,9 @@
 import ComingSoonPage from '@/components/ComingSoonPage';
 
-export default function Home() {
+export default function Billing() {
   return (
     <div>
-      <ComingSoonPage />
+      <ComingSoonPage name="Billing" />
     </div>
   );
 }
