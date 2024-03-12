@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { BarChart3, ChevronFirst, MoreVertical, ChevronLast, LayoutDashboardIcon, CircleDollarSignIcon, StretchHorizontalIcon, ShoppingBagIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 interface SidebarItemProps {
   icon: JSX.Element;
@@ -15,7 +15,17 @@ interface SidebarItemProps {
 }
 
 export default function Sidebar() {
+  const pathname = usePathname();
+  const router = useRouter();
   const [expanded, setExpanded] = useState(true);
+
+  if (pathname === '/login') {
+    return null;
+  }
+
+  const handleLogout = () => {
+    router.push('/login');
+  };
 
   return (
     <aside className="h-screen">
@@ -44,7 +54,9 @@ export default function Sidebar() {
           `}
           >
             <h4 className="font-semibold">Tehseem</h4>
-            <Button variant="outline">Logout</Button>
+            <Button variant="outline" onClick={handleLogout}>
+              Logout
+            </Button>
           </div>
         </div>
       </nav>
