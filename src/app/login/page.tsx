@@ -1,9 +1,10 @@
 'use client';
-import { useState } from 'react'; // Import useState
+import { useEffect, useState } from 'react'; // Import useState
 import Image from 'next/image';
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { LoadingSpinner } from '@/components/ui/loading';
+import { Button } from '@/components/ui/button';
 
 const logoLink = 'https://ik.imagekit.io/uoi0avgvg/Crator%20Tech/Company%20Logo/WhatsApp%20Image%202024-02-24%20at%2022.25.25_b3a487b7.jpg?updatedAt=1710239255953';
 
@@ -17,9 +18,12 @@ export default function Login() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
+      // localStorage.setItem();
       router.push('/');
     }, 3000);
   };
+
+  useEffect(() => {});
   return (
     <div
       className="bg-[#121212] h-screen w-screen flex flex-col
@@ -35,9 +39,9 @@ export default function Login() {
               {showPassword ? <EyeIcon /> : <EyeOffIcon />}
             </button>
           </div>
-          <button className="bg-white rounded-md p-3 mt-3 font-medium items-center flex justify-center" type="submit">
+          <Button className="bg-white text-black hover:bg-slate-400 hover:text-white  text-xl rounded-md p-3 mt-3 font-medium items-center flex justify-center" type="submit">
             {isLoading ? <LoadingSpinner size={32} /> : 'Login'}
-          </button>
+          </Button>
         </form>
       </div>
     </div>
