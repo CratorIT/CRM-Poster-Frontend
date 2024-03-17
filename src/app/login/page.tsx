@@ -23,7 +23,6 @@ export default function Login() {
     }, 3000);
   };
 
-  useEffect(() => {});
   return (
     <section className="bg-gray-50 min-h-screen flex items-center justify-center">
       {/* <!-- login container --> */}

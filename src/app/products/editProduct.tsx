@@ -4,13 +4,28 @@ import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardContent } from '@/components/ui/card';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import Image from 'next/image';
 export default function EditProduct() {
   const [form, setForm] = useState({
     SKU: '',
     productName: '',
+    mainImage: { url: 'https://i.pinimg.com/736x/59/24/b7/5924b7c168559965fd925b62ff284813.jpg', alt: 'ironMan Poster super hero' },
+    sideImage1: { url: 'https://m.media-amazon.com/images/I/81vvUYezGWL._AC_UF1000,1000_QL80_.jpg', alt: 'jujutsu kaisen anime' },
+    sideImage2: { url: '', alt: '' },
   });
+
+  const imageCaraousalList = useMemo(() => {
+    const imageList = [];
+    imageList.push({ ...form?.mainImage, id: 'mainImage', name: 'Main Image' });
+    imageList.push({ ...form?.sideImage1, id: 'sideImage1', name: 'Side Image 1' });
+    imageList.push({ ...form?.sideImage2, id: 'sideImage2', name: 'Side Image 2' });
+
+    return imageList;
+  }, [form]);
 
   return (
     <Sheet>
@@ -22,6 +37,31 @@ export default function EditProduct() {
             <label>Edit </label>
           </div>
           <Button className="mt-4">Update</Button>
+        </div>
+        {/* {Image caraousal} */}
+        <div className="w-full my-3 items-center flex justify-center">
+          <Carousel className="w-[50%]">
+            <CarouselContent>
+              {imageCaraousalList?.map((item, index) => (
+                <CarouselItem key={index}>
+                  <div className="p-1">
+                    <h1>{item.name}</h1>
+                    <Card className="flex flex-col justify-center items-center">
+                      <CardContent className="flex aspect-square items-center justify-center p-6">
+                        <img src={item.url} alt={item.alt} />
+                      </CardContent>
+                      <div className="flex flex-col gap-1 w-[80%] justify-center items-center mb-1 ">
+                        <Input className="bg-gray-50" type="file" />
+                        <Input className="bg-gray-50" type="text" placeholder="enter Image alt tag" />
+                      </div>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6 ">
